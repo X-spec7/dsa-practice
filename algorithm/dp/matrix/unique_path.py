@@ -35,4 +35,3 @@ pathCountSpaceOptimized = uniquePathsSpaceOptimized(m, n)
 
 print("The count of all possible unique path is: ", pathCount)
 print("The count of all possible unique path counted by space optimized version is: ", pathCountSpaceOptimized)
-    
