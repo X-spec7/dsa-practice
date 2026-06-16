@@ -1,6 +1,12 @@
 def uniquePathObstacle(m: int, n: int, grid: list[list[int]]):
     dp = [[1 - grid[r][c] for c in range(n)] for r in range(m)]
-    
+
+    for c in range(1, n):
+        dp[0][c] = 0 if grid[0][c] == 1 else dp[0][c - 1]
+
+    for r in range(1, m):
+        dp[r][0] = 0 if grid[r][0] == 1 else dp[r - 1][0]
+
     for row in range(1, m):
         for col in range(1, n):
             if grid[row][col] != 1:
