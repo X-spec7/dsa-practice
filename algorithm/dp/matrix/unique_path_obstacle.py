@@ -14,6 +14,28 @@ def uniquePathObstacle(m: int, n: int, grid: list[list[int]]):
     
     return dp[m - 1][n - 1]
 
+
+def uniquePathObstacleOptimized(m: int, n: int, grid: list[list[int]]) -> int:
+    if grid[0][0] == 1 or grid[m-1][n-1] == 1:
+        return 0
+
+    dp = [0] * n
+    dp[0] = 1
+
+    for c in range(1, n):
+        dp[c] = 0 if grid[0][c] == 1 else dp[c - 1]
+
+    for r in range(1, m):
+        dp[0] = 0 if grid[r][0] == 1 else dp[0]
+        for c in range(1, n):
+            if grid[r][c] == 1:
+                dp[c] = 0
+            else:
+                dp[c] += dp[c - 1]
+
+    return dp[n - 1]
+
+
 while True:
     try:
         m, n = map(int, input("Enter the grid size (rows, cols): ").split())
@@ -46,6 +68,5 @@ for i in range(m):
         except ValueError:
             print("Please input valid row of 0 and 1.")
             
-pathCount = uniquePathObstacle(m, n, grid)
-
-print("The possible path count is: ", pathCount)
+print("2D dp:        ", uniquePathObstacle(m, n, grid))
+print("Optimized dp: ", uniquePathObstacleOptimized(m, n, grid))
